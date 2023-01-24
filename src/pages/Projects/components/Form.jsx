@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import { toast } from "react-toastify";
-import { useRef } from "react";
-import api from "../../../services/api";
+import { useRef, useEffect } from "react";
+import { api } from "../../../services/api";
 
 const FormContainer = styled.form`
   display: flex;
-  align-items: flex-end;
+  justify-content: center;
+  text-align: center;
+  max-width: 500px;
   gap: 10px;
   flex-wrap: wrap;
   background-color: #fff;
@@ -47,61 +49,100 @@ const Select = styled.select`
 
 
 
-const Form = ({ coordinators }) => {
-  const ref = useRef()
+const Form = ({ onEdit, setOnEdit }) => {
+  const ref = useRef();
+
+  useEffect(() => {
+    if (onEdit) {
+      const project = ref.current;
+
+      project.titulo.value = onEdit.titulo;
+      project.data_inicio.value = onEdit.data_inicio;
+      project.data_termino.value = onEdit.data_termino;
+      project.cod_coord.value = onEdit.codcoord
+      project.nome_coord.value = onEdit.nome_coord;
+      project.instituto_coord.value = onEdit.instituto_coord;
+    }
+  }, [onEdit]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-
-    const select = document.getElementById('Coordinators');
-    const value = select.options[select.selectedIndex].value;
-    console.log(value)
-
-
     const project = ref.current;
-    if (!project.titulo.value || !project.data_inicio.value || !project.data_fim.value) {
+    if (
+      !project.titulo.value ||
+      !project.data_inicio.value ||
+      !project.data_termino.value ||
+      !project.cod_coord.value ||
+      !project.nome_coord.value ||
+      !project.instituto_coord.value
+    ) {
       return toast.warn("Preencha todos os campos!");
     }
 
-    
+    if (onEdit) {
+      await api
+        .put("/projetos/" + onEdit.codprojeto, {
+          titulo: project.titulo.value,
+          data_inicio: project.data_inicio.value,
+          data_termino: project.data_termino.value,
+          codCoord: project.cod_coord.value,
+          nome_coord: project.nome_coord.value,
+          instituto_coord: project.instituto_coord.value
+        })
+        .then(({ data }) => toast.success(data))
+        .catch(({ data }) => toast.error(data));
+    } else {
+      await api
+        .post('/projetos', {
+          titulo: project.titulo.value,
+          data_inicio: project.data_inicio.value,
+          data_termino: project.data_termino.value,
+          codCoord: project.cod_coord.value,
+          nome_coord: project.nome_coord.value,
+          instituto_coord: project.instituto_coord.value
+        })
+        .then(({ data }) => toast.success(data))
+        .catch(({ data }) => toast.error(data));
+    }
 
-    await api
-      .post("http://localhost:8800", {
-        titulo: project.titulo.value,
-        data_inicio: project.data_inicio.value,
-        data_fim: project.data_fim.value
-      })
-      .then(({ data }) => toast.success(data))
-      .catch(({ data }) => toast.error(data));
+    project.titulo.value = "";
+    project.data_inicio.value = "";
+    project.data_termino.value = "";
+    project.cod_coord.value = "";
+    project.nome_coord.value = "";
+    project.instituto_coord.value = "";
 
-  }
+    setOnEdit(null);
+  };
 
 
   return (
     <FormContainer ref={ref} onSubmit={handleSubmit}>
       <InputArea>
-        <Label>Titulo</Label>
+        <Label>Titulo do Projeto</Label>
         <Input name="titulo" />
       </InputArea>
       <InputArea>
         <Label>Data de Início</Label>
-        <Input name="data_inicio" type="date" />
+        <Input name="data_inicio" type="text" />
       </InputArea>
       <InputArea>
         <Label>Data de Término</Label>
-        <Input name="data_fim" type="date" />
+        <Input name="data_termino" type="text" />
       </InputArea>
       <InputArea>
-        <Label>Coodenador(a)</Label>
-        <Select id="Coordinators" defaultValue={'Escolha'}>
-          {coordinators.map((item, i) => (
-            <option key={i} name='' >{item.nome}</option>
-          ))}
-        </Select>
+        <Label>Cod. Identificador</Label>
+        <Input name="cod_coord" type="text" />
       </InputArea>
-
-
+      <InputArea>
+        <Label>Nome Coordenador(a)</Label>
+        <Input name="nome_coord" type="text" />
+      </InputArea>
+      <InputArea>
+        <Label>Instituto</Label>
+        <Input name="instituto_coord" type="text" />
+      </InputArea>
       <Button type="submit">SALVAR</Button>
     </FormContainer>
   );

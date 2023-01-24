@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import DataProject from './components/DataProject'
-import api from '../../services/api'
+import { api } from '../../services/api'
 import styled from "styled-components"
 import Form from "./components/Form"
 
@@ -18,31 +18,26 @@ const Container = styled.div`
 const Title = styled.h2``;
 
 const Projects = () => {
-    const [projects, setProjects] = useState([]);
-    const [coordinators, setCoordinators] = useState([])
+  const [projects, setProjects] = useState([]);
+  const [onEdit, setOnEdit] = useState(null)
 
-    useEffect(() => {
-        api
-            .get('/projetos')
-            .then((response) => setProjects(response.data))
-            .catch((err) => {
-                console.log(err)
-            }),
-        api
-            .get('/coordenadores')
-            .then(response => setCoordinators(response.data))
-            .catch(err => {
-                console.log(err)
-            })
-    }, [])
+  useEffect(() => {
+    api
+      .get('/projetos')
+      .then((response) => setProjects(response.data))
+      .catch((err) => {
+        console.log(api.defaults.headers.Authorization)
+        console.log(err)
+      })
+  }, [projects])
 
-    return (
-        <Container>
-            <Title>Projetos</Title>
-            <Form coordinators = {coordinators}/>
-            <DataProject projects={projects} setProjects={setProjects} />
-        </Container>
-    )
+  return (
+    <Container>
+      <Title>Projetos</Title>
+      <Form onEdit={onEdit} setOnEdit={setOnEdit}/>
+      <DataProject projects={projects} setProjects={setProjects} setOnEdit={setOnEdit}/>
+    </Container>
+  )
 
 }
 
