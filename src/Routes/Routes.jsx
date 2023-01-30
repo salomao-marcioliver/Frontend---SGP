@@ -4,6 +4,7 @@ import Home from '../pages/Home'
 import Projects from '../pages/Projects'
 import LoginPage from '../pages/LoginPage'
 import { useContext } from 'react'
+import Students from '../pages/Students'
 
 function MainRoutes() {
   const Private = ({ children }) => {
@@ -26,6 +27,7 @@ function MainRoutes() {
           <Route exact path='/login' element={<LoginPage />} />
           <Route exact path='/' element={<Private><Home /></Private>} />
           <Route exact path='/projetos' element={<Private><Projects /></Private>} />
+          <Route exact path='/bolsistas' element={<Private><Students /></Private>} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>
