@@ -77,7 +77,7 @@ const Form = ({ onEdit, setOnEdit }) => {
       !project.nome_coord.value ||
       !project.instituto_coord.value
     ) {
-      return toast.warn("Preencha todos os campos!");
+      return alert("Preencha todos os campos!");
     }
 
     if (onEdit) {
