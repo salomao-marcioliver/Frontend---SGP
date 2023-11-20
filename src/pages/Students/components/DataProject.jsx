@@ -27,13 +27,37 @@ export const Tr = styled.tr`
 export const Th = styled.th`
   text-align: center;
   border-bottom: inset;
-  padding-bottom: 5px;
+  padding: 0 10px 5px 10px;
+  word-break: keep-all;
 `;
 
 export const Td = styled.td`
   padding-top: 15px;
-
+  text-align: center;
+  word-break: keep-all;
+  min-width: 60px;
 `;
+
+const StyledTrashIcon = styled(FaTrash)`
+  cursor: pointer;
+  padding: 0 5px 0 5px;
+`;
+
+const StyledEditIcon = styled(FaEdit)`
+  cursor: pointer;
+  padding: 0 5px 0 5px;
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: #000;
+  background-color: #FFF;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  padding: 10px;
+`;
+
+
 
 const Data = ({ students, setStudents, setOnEdit }) => {
   const handleEdit = (item) => {
@@ -76,14 +100,14 @@ const Data = ({ students, setStudents, setOnEdit }) => {
               <Td>{item.codprojeto} - {item.titulo}</Td>
               <Td>{item.nome_coord}</Td>
               <Td>
-                <FaTrash onClick={() => handleDelete(item.num_matricula)} />
-                <FaEdit onClick={() => handleEdit(item)} />
+                <StyledEditIcon onClick={() => handleEdit(item)} />
+                <StyledTrashIcon onClick={() => handleDelete(item.num_matricula)} />
               </Td>
             </Tr>
           ))}
         </Tbody>
       </Table>
-      <Link to="/">Ir para Home</Link>
+      <StyledLink to="/">Ir para Home</StyledLink>
     </>
   )
 }

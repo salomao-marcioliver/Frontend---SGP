@@ -1,6 +1,31 @@
 import { useContext } from "react";
+import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/auth";
+
+const Div = styled.div`
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const H1 = styled.h1`
+  color: #FFF;
+`;
+
+const H2 = styled.h2`
+  color: #FFF;
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: #000;
+  background-color: #FFF;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  padding: 10px;
+`;
 
 function Home() {
   const { logout } = useContext(AuthContext)
@@ -8,16 +33,13 @@ function Home() {
     logout();
   }
   return (
-    <div>
-      <h1>SGP</h1>
-      <h2>Sistema Gerenciador de Projetos</h2>
-      <Link to='/projetos'>Ir para Área de Projetos</Link>
-      <br />
-      <Link to='/bolsistas'>Ir para Área de Bolsistas</Link>
-      <br />
-      <br />
-      <button onClick={handleLogout}>Logout</button>
-    </div>
+    <Div>
+      <H1>SGP</H1>
+      <H2>Sistema Gerenciador de Projetos</H2>
+        <StyledLink to='/projetos'>Ir para Área de Projetos</StyledLink>
+        <StyledLink to='/bolsistas'>Ir para Área de Bolsistas</StyledLink>
+        <button onClick={handleLogout}>Logout</button>
+    </Div>
   )
 }
 
