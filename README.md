@@ -1,6 +1,6 @@
 # Sistema de Gestão de Projetos - Frontend
 
-A parte frontend do **Sistema de Gestão de Projetos** é uma aplicação em **React.js** que interage com a parte backend para fornecer uma interface de usuário para gerenciar projetos, bolsistas e coordenadores. O Backend do Sistema de Gestão de Projetos (SGP) está localizado neste [link](https://github.com/salomao-marcioliver/Backend---Final-Project-DB).
+A parte frontend do **Sistema de Gestão de Projetos** é uma aplicação em **React.js** que interage com a parte backend para fornecer uma interface de usuário para gerenciar projetos, bolsistas e coordenadores. O Backend do Sistema de Gestão de Projetos (SGP) está localizado neste [link](https://github.com/salomao-marcioliver/Backend---SGP).
 
 ## Pré-requisitos
 
@@ -13,8 +13,8 @@ Para configurar e executar o projeto frontend, siga estas etapas:
 1. **Clone o repositório**:
 
    ```bash
-   git clone https://github.com/salomao-marcioliver/Frontend---Final-Project-DB.git
-   cd Frontend---Final-Project-DB
+   git clone https://github.com/salomao-marcioliver/Frontend---SGP.git
+   cd Frontend---SGP
 
 2. Instale as dependências do projeto usando npm:
 
