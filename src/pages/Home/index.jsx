@@ -24,8 +24,12 @@ const StyledLink = styled(Link)`
   background-color: #FFF;
   margin-bottom: 20px;
   border-radius: 20px;
-  padding: 10px;
+  padding: 8px 20px;
 `;
+
+const Button = styled.button`
+  cursor: pointer;
+`
 
 function Home() {
   const { logout } = useContext(AuthContext)
@@ -38,7 +42,7 @@ function Home() {
       <H2>Sistema Gerenciador de Projetos</H2>
         <StyledLink to='/projetos'>Ir para Área de Projetos</StyledLink>
         <StyledLink to='/bolsistas'>Ir para Área de Bolsistas</StyledLink>
-        <button onClick={handleLogout}>Logout</button>
+        <Button onClick={handleLogout}>Logout</Button>
     </Div>
   )
 }

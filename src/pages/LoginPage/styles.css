@@ -8,10 +8,11 @@
 }
 
 #login .form {
-  background-color: #f1f1f1;
+  background-color: rgb(255, 255, 255);
   width: 100%;
   max-width: 480px;
-  padding: 0.5rem;
+  padding: 50px 15px 50px 10px;
+  border-radius: 20px;
 }
 
 #login .field {
@@ -30,3 +31,21 @@
   text-align: center;
   margin-top: 0.5rem;
 }
+
+.title {
+  color: #FFF;
+  margin: 0;
+}
+
+.description {
+  color: #FFF;
+  margin-bottom: 50px;
+}
+
+button {
+  background-color: #000;
+  color: #FFF;
+  padding: 5px 20px 5px 20px;
+  border-radius: 15px;
+}
+

@@ -32,7 +32,6 @@ export const AuthProvider = ({ children }) => {
 
     api.defaults.headers.Authorization = `Bearer ${token}`;
     //api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    console.log("aqui é o teste", api.defaults.headers.Authorization)
 
     setUser(loggedUser)
     navigate("/")
